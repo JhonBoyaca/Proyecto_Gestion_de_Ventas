@@ -5,6 +5,7 @@ class Productos {
     private $precioCompra;
     private $precioVenta;
     private $stock;
+    private $stock2;
     private $stockMin;
     private $ProveedoresID;
     private $categoriasID;
