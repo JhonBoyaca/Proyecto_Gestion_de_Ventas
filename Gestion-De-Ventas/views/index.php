@@ -1,6 +1,32 @@
 <?php
+session_start();
+require_once "../model/DAOUsuarios.php";
 $cdns = file_get_contents("plugins/encabezados.php");
 $scripts = file_get_contents("plugins/scripts.php");
+
+if ($_POST) {
+    if (isset($_POST["btnLogin"])) {
+        $dao = new DAOUsuarios();
+        $us = new Usuario();
+
+        $us->setCorreo($_POST["txtUsuario"]);
+        $us->setContrasena($_POST["txtContrasena"]);
+
+        $datos = $dao->login($us);
+        if ($datos != null) {
+            $_SESSION["correo"]["nombre"] = $datos["nombre"];
+            $_SESSION["correo"]["rol"] = $datos["rol"];
+            header("Location:home.php");
+        }
+    }
+}
+if ($_GET) {
+
+    if (isset($_GET["cerrar"])) {
+        session_destroy();
+        header("Location:index.php");
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -21,16 +47,17 @@ $scripts = file_get_contents("plugins/scripts.php");
             <p class="text-center">
                 Inicia sesión con tu cuenta
             </p>
-            <form action="">
+            <form action="index.php" method="post">
                 <div class="form-group">
-                    <label for="UserName" class="bmd-label-floating"><i class="fas fa-user-secret"></i> &nbsp;Usuario</label>
-                    <input type="text" class="form-control" id="UserName" name="usuario" pattern="[a-zA-Z0-9]{1,35}" maxlength="35">
+                    <label for="UserName" class="bmd-label-floating"><i class="fas fa-user-secret"></i> &nbsp;Correo Usuario</label>
+                    <input type="text" class="form-control" id="txtUsuario" name="txtUsuario" pattern="[^@]+@gmail\.com" title="Ingresa un correo de Gmail válido" required>
                 </div>
                 <div class="form-group">
                     <label for "UserPassword" class="bmd-label-floating"><i class="fas fa-key"></i> &nbsp;Contraseña</label>
-                    <input type="password" class="form-control" id="UserPassword" name="clave" maxlength="200">
+                    <input type="password" class="form-control" id="txtContrasena" name="txtContrasena" minlength="7" required>
+                    <small class="form-text text-muted">La contraseña debe tener al menos 7 caracteres.</small>
                 </div>
-                <a href="home.php" class="btn-login text-center">LOG IN</a>
+                <input type="submit" name="btnLogin" value="Iniciar Sesion" class="btn-login text-center">
             </form>
         </div>
     </div>

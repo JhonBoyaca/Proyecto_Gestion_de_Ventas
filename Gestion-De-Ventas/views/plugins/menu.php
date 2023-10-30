@@ -6,14 +6,14 @@
             <i class="far fa-times-circle show-nav-lateral"></i>
             <img src="./assets/avatar/Avatar.png" class="img-fluid" alt="Avatar">
             <figcaption class="roboto-medium text-center">
-                Carlos Alfaro <br><small class="roboto-condensed-light">Web Developer</small>
+                <br><small class="roboto-condensed-light"></small>
             </figcaption>
         </figure>
         <div class="full-box nav-lateral-bar"></div>
         <nav class="full-box nav-lateral-menu">
             <ul>
                 <li>
-                    <a href="home.html"><i class="fab fa-dashcube fa-fw"></i> &nbsp; Dashboard</a>
+                    <a href="home.php"><i class="fab fa-dashcube fa-fw"></i> &nbsp; Home</a>
                 </li>
 
                 <li>
@@ -94,6 +94,9 @@
 
                 <li>
                     <a href="company.html"><i class="fas fa-store-alt fa-fw"></i> &nbsp; Empresa</a>
+                </li>
+                <li>
+                    <a href="index.php?cerrar=true"><i class="fas  fa-user-secret fa-fw"></i> &nbsp; Cerrar Sesion</a>
                 </li>
             </ul>
         </nav>
