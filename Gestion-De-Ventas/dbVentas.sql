@@ -25,6 +25,7 @@ create table Proveedores (
 create table Productos(
 	productosID int primary key auto_increment,
     nombre varchar(100),
+    codigo varchar(20),
     precio_compra decimal(30,2),
     precio_venta decimal(30,2),
     stock int,

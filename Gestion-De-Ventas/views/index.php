@@ -3,7 +3,6 @@ session_start();
 require_once "../model/DAOUsuarios.php";
 $cdns = file_get_contents("plugins/encabezados.php");
 $scripts = file_get_contents("plugins/scripts.php");
-
 if ($_POST) {
     if (isset($_POST["btnLogin"])) {
         $dao = new DAOUsuarios();
@@ -17,9 +16,12 @@ if ($_POST) {
             $_SESSION["correo"]["nombre"] = $datos["nombre"];
             $_SESSION["correo"]["rol"] = $datos["rol"];
             header("Location:home.php");
+        } else {
+            echo "No se encontraron datos de inicio de sesión válidos."; // Agregar un mensaje de depuración
         }
     }
 }
+
 if ($_GET) {
 
     if (isset($_GET["cerrar"])) {
@@ -68,3 +70,6 @@ if ($_GET) {
 </body>
 
 </html>
+
+
+</script>

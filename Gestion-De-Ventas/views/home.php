@@ -3,6 +3,8 @@ $cdns = file_get_contents("plugins/encabezados.php");
 $scripts = file_get_contents("plugins/scripts.php");
 $menu = file_get_contents("plugins/menu.php");
 
+
+
 session_start();
 
 if (!isset($_SESSION["correo"])) {
@@ -38,8 +40,16 @@ if (!isset($_SESSION["correo"])) {
 
             <!-- Page header -->
             <div class="full-box page-header">
+                <!-- Content of the page header, such as titles, etc. -->
+            </div>
 
-                <!-- Content -->
+            <!-- Content -->
+            <div class="full-box content" id="content-container">
+                <!-- Aquí debes colocar el contenido de tu página -->
+                <h1>Mi contenido principal</h1>
+                <p>Este es el contenido de mi página web.</p>
+
+            </div>
 
 
 
@@ -48,6 +58,8 @@ if (!isset($_SESSION["correo"])) {
 
 
     <?= $scripts ?>
+    
+    <script src="./js/codigo.js"></script>
 </body>
 
 </html>

@@ -53,11 +53,10 @@
 
                 <li>
                     <a href="#" class="nav-btn-submenu"><i class="fas fa-file-invoice-dollar fa-fw"></i> &nbsp;
-                        Préstamos <i class="fas fa-chevron-down"></i></a>
+                        Ventas <i class="fas fa-chevron-down"></i></a>
                     <ul>
                         <li>
-                            <a href="reservation-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; Nuevo
-                                préstamo</a>
+                            <a href="#nada"  id="nueva-venta"><i class="fas fa-plus fa-fw"></i> &nbsp; Nueva Venta</a>
                         </li>
                         <li>
                             <a href="reservation-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp;

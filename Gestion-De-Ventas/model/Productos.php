@@ -2,6 +2,7 @@
 class Productos {
     private $productosID;
     private $nombre;
+    private $codigo;
     private $precioCompra;
     private $precioVenta;
     private $stock;
@@ -18,6 +19,8 @@ class Productos {
         return $this->productosID;
     }
 
+    
+
     public function setProductosID($productosID) {
         $this->productosID = $productosID;
         return $this;
@@ -29,6 +32,16 @@ class Productos {
 
     public function setNombre($nombre) {
         $this->nombre = $nombre;
+        return $this;
+    }
+
+    
+    public function getCodigo() {
+        return $this->codigo;
+    }
+
+    public function setCodigo($codigo) {
+        $this->codigo = $codigo;
         return $this;
     }
 
