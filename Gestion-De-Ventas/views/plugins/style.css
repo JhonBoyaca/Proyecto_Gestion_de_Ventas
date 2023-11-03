@@ -134,42 +134,6 @@ html {
 	outline: none;
 }
 
-.table .btn {
-	margin-bottom: 0;
-}
-
-.table thead th {
-	color: #FFF;
-}
-
-.table tbody tr {
-	color: #333;
-	transition: all .2s ease-in-out;
-}
-
-.table-dark,
-.table {
-	background-color: #fff;
-}
-
-.table-dark {
-	border: 1px solid var(--accent-color);
-}
-
-.table-dark thead tr {
-	background-color: var(--accent-color);
-}
-
-.table-dark td,
-.table-dark thead th,
-.table-dark th {
-	border: none;
-}
-
-.table-dark tr:hover {
-	color: var(--color-three);
-	background-image: linear-gradient(to right, transparent, rgba(124, 100, 112, .2) 85%, transparent);
-}
 
 .page-link {
 	transition: all .2s ease-in-out;
@@ -180,9 +144,7 @@ html {
 	color: #FFF;
 }
 
-table form {
-	margin-bottom: 0;
-}
+
 
 /*----------  Text Styles  ----------*/
 .roboto-medium {

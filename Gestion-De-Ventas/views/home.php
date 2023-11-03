@@ -44,10 +44,11 @@ if (!isset($_SESSION["correo"])) {
             </div>
 
             <!-- Content -->
-            <div class="full-box content" id="content-container">
-                <!-- Aquí debes colocar el contenido de tu página -->
-                <h1>Mi contenido principal</h1>
-                <p>Este es el contenido de mi página web.</p>
+            <div class="full-box content" >
+            <!-- Aquí debes colocar el contenido de tu página -->
+             <div class="container" id="content-container">
+
+             </div>
 
             </div>
 

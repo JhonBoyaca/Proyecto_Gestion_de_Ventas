@@ -17,49 +17,78 @@ foreach ($productos as $producto) {
 
 ?>
 
-<body>
-    <h3>SISTEMA DE VENTAS</h3>
-    <input type="text" list="productos" id="miInput">
-    <datalist id="productos">
-        <?php echo $productosOptions; ?>
-    </datalist>
 
-    <input id="cantidadProducto" type="text">
+<h3>SISTEMA DE VENTAS</h3>
 
-    <button id="btnAgregarProducto">Agregar Producto</button>
+<div class="row">
+    <div class="col-4">
+        <input type="text" list="productos" placeholder="productos" class="form-control" id="miInput">
+        <datalist id="productos">
+            <?php echo $productosOptions; ?>
+        </datalist>
+    </div>
+    <div class="col-4">
+        <input id="cantidadProducto" type="text" value="" placeholder="cantidad" class="form-control">
+    </div>
 
-    <table id="tablaProductos">
+    <div class="col-2">
+        <button id="btnAgregarProducto" class="btn btn-success">Agregar Producto</button>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <table id="tablaProductos" class="table" style="width: 100%;">
         <thead>
-            <tr>
+            <tr class="table-dark">
                 <th>Código</th>
                 <th>Nombre</th>
                 <th>Precio</th>
-                <!-- Agrega más encabezados de columna si es necesario -->
+                <input>
+                <th>Cantidad Venta</th>
             </tr>
         </thead>
         <tbody>
             <!-- Aquí se cargarán los productos -->
         </tbody>
     </table>
+</div>
 
-    <!-- Resto de tu código aquí -->
 
-</body>
+
+
+<!-- Resto de tu código aquí -->
+
 
 <script>
     document.getElementById('btnAgregarProducto').addEventListener('click', function() {
         var codigoProducto = document.getElementById('miInput').value;
-        var productoEncontrado = encontrarProductoPorCodigo(codigoProducto);
+        var cantidadProducto = document.getElementById('cantidadProducto').value;
 
+
+        validarYAgregarProducto(codigoProducto, cantidadProducto)
     });
 
+    function validarYAgregarProducto(codigo, cantidad) {
+        // Verificar si los valores son nulos o vacíos
+        if (!codigo || !cantidad || codigo.trim() == '' || cantidad.trim() == '') {
+            // Mostrar una alerta dulce
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Por favor, ingrese un código de producto y una cantidad válida.',
+            });
+        } else {
+
+            encontrarProductoPorCodigo(codigo, cantidad);
+        }
+    }
     // Función para agregar una fila HTML a la tabla
-    function agregarProductoATabla(producto) {
+    function agregarProductoATabla(producto, cantidad) {
         // Obtén los datos del producto desde la respuesta JSON
         var codigo = producto.codigo;
         var nombre = producto.nombre;
         var precio = producto.precio;
-
+        var productoId = producto.id;
         // Obtén la referencia a la tabla
         var tabla = $("#tablaProductos");
 
@@ -70,12 +99,21 @@ foreach ($productos as $producto) {
         var celdaCodigo = $("<td>" + codigo + "</td>");
         var celdaNombre = $("<td>" + nombre + "</td>");
         var celdaPrecio = $("<td>" + precio + "</td>");
+        // Crea una celda para la cantidad con un input
+        var celdaCantidad = $("<td><input type='number' id='" + productoId + "' class='cantidad-input' value='" + cantidad + "'></td>");
 
         // Agrega las celdas a la fila
         nuevaFila.append(celdaCodigo);
         nuevaFila.append(celdaNombre);
         nuevaFila.append(celdaPrecio);
+        nuevaFila.append(celdaCantidad);
 
+        celdaCantidad.find('input').on('change', function() {
+            // Aquí puedes manejar el cambio de cantidad
+            var nuevaCantidad = $(this).val();
+            var inputId = $(this).attr('id');
+         
+        });
         // Agrega la fila a la tabla
         tabla.find('tbody').append(nuevaFila);
     }
@@ -96,7 +134,7 @@ foreach ($productos as $producto) {
                 if (producto) {
                     var producto = JSON.parse(producto);
 
-                    agregarProductoATabla(producto);
+                    agregarProductoATabla(producto, cantidad);
                 } else {
                     // Manejar el caso en el que no se encontró el producto
                     console.log('Producto no encontrado.');

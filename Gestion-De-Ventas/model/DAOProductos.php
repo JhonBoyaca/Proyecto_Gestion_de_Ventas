@@ -69,6 +69,7 @@ class DAOProductos
 
 
             $productoSend = array(
+                "id" => $fila["productosID"],
                 "codigo" => $fila["codigo"],
                 "nombre" => $fila["nombre"],
                 "precio" => $fila["precio_venta"]
@@ -83,4 +84,6 @@ class DAOProductos
         $res->close();
         return  $productoJSON;
     }
+
+    
 }
