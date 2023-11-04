@@ -38,6 +38,8 @@ if ($_POST) {
             case "getComboCategorias":
                 $respuesta = $dao->getComboCategorias();
                 break;
+
+
             case "agregar":
                 //vamos hacer que en la vista se envie la key "data" y trae la data del form
                 parse_str($_POST["data"], $data);

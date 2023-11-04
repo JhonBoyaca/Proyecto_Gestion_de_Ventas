@@ -13,8 +13,10 @@ if ($_POST) {
 
         $datos = $dao->login($us);
         if ($datos != null) {
-            $_SESSION["correo"]["nombre"] = $datos["nombre"];
-            $_SESSION["correo"]["rol"] = $datos["rol"];
+            $_SESSION["correo"] = $datos["correo"];
+            $_SESSION["nombre"] = $datos["nombre"];
+            $_SESSION["rol"] = $datos["rol"];
+            $_SESSION["usuarioID"] = $datos["usuarioID"];
             header("Location:home.php");
         } else {
             echo "No se encontraron datos de inicio de sesión válidos."; // Agregar un mensaje de depuración

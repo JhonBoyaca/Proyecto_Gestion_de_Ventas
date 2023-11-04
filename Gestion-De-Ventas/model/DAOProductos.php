@@ -51,6 +51,29 @@ class DAOProductos
         return $productos;
     }
 
+    public function actualizarPrecioDeVenta($idProducto, $nuevoPrecio)
+    {
+        $sql = "UPDATE productos SET precio_venta = '$nuevoPrecio' WHERE productosID = $idProducto";
+        $this->conectar();
+
+        if ($this->con->query($sql)) {
+            // Éxito al actualizar el precio
+            $resultado = array(
+                "success" => true,
+                "message" => "Precio de venta actualizado con éxito"
+            );
+        } else {
+            // Error al actualizar el precio
+            $resultado = array(
+                "success" => false,
+                "message" => "Error al actualizar el precio de venta"
+            );
+        }
+
+        $this->desconectar();
+        return json_encode($resultado);
+    }
+    
     // Crear un arreglo asociativo con los datos
     public function encontrarProductoPorCodigo($codigo)
     {

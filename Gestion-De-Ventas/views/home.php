@@ -11,7 +11,9 @@ if (!isset($_SESSION["correo"])) {
     header("Location:index.php");
 }
 
-
+$correo = $_SESSION["correo"];
+$rol = $_SESSION["rol"];
+$usuarioID = $_SESSION["usuarioID"];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -40,15 +42,23 @@ if (!isset($_SESSION["correo"])) {
 
             <!-- Page header -->
             <div class="full-box page-header">
+                <div class="container" id="content-container">
+
+                    <h1>Bienvenido, <?php echo $correo; ?></h1>
+                    <p>Rol: <?php echo $rol; ?></p>
+                    <input type="hidden" id="usuarioID" value="<?php echo $usuarioID; ?>">
+
+                    <!-- Aquí colocas el contenido de tu página -->
+                </div>
                 <!-- Content of the page header, such as titles, etc. -->
             </div>
 
             <!-- Content -->
-            <div class="full-box content" >
-            <!-- Aquí debes colocar el contenido de tu página -->
-             <div class="container" id="content-container">
+            <div class="full-box content">
+                <!-- Aquí debes colocar el contenido de tu página -->
+                <div class="container" id="content-container">
 
-             </div>
+                </div>
 
             </div>
 
@@ -56,10 +66,13 @@ if (!isset($_SESSION["correo"])) {
 
         </section>
     </main>
-
+    <script>
+        var usuarioID = document.getElementById('usuarioID').value;
+        console.log('Usuario ID:', usuarioID);
+    </script>
 
     <?= $scripts ?>
-    
+
     <script src="./js/codigo.js"></script>
 </body>
 

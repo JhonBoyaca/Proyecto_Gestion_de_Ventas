@@ -22,7 +22,7 @@ class DAOUsuarios
     public function login(Usuario $usuario)
     {
         $datos = array();
-        $sql = "select correo, rol from usuario where correo='" . $usuario->getCorreo()
+        $sql = "select * from usuario where correo='" . $usuario->getCorreo()
             . "' and contrasena='" . $usuario->getContrasena() . "'";
         $this->conectar();
         $res = $this->con->query($sql);
@@ -31,8 +31,10 @@ class DAOUsuarios
             return null;
         }
         while ($fila = mysqli_fetch_assoc($res)) {
-            $datos["nombre"] = $fila["correo"];
+            $datos["correo"] = $fila["correo"];
+            $datos["nombre"] = $fila["nombre"];
             $datos["rol"] = $fila["rol"];
+            $datos["usuarioID"] = $fila["usuarioID"];
         }
         $this->desconectar();
         $res->close();
