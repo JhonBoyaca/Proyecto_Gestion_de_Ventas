@@ -1,5 +1,6 @@
 <?php
-class Usuario {
+class Usuario
+{
     private $usuarioID;
     private $dui;
     private $correo;
@@ -8,69 +9,84 @@ class Usuario {
     private $contrasena;
     private $activo;
 
-    public function __construct() {
+    public function __construct()
+    {
         // Constructor vacío
     }
 
-    public function getUsuarioID() {
+    public function getUsuarioID()
+    {
         return $this->usuarioID;
     }
 
-    public function setUsuarioID($usuarioID) {
+    public function setUsuarioID($usuarioID)
+    {
         $this->usuarioID = $usuarioID;
         return $this;
     }
 
-    public function getDui() {
+    public function getDui()
+    {
         return $this->dui;
     }
 
-    public function setDui($dui) {
+    public function setDui($dui)
+    {
         $this->dui = $dui;
         return $this;
     }
 
-    public function getCorreo() {
+    public function getCorreo()
+    {
         return $this->correo;
     }
 
-    public function setCorreo($correo) {
+    public function setCorreo($correo)
+    {
         $this->correo = $correo;
         return $this;
     }
 
-    public function getNombre() {
+    public function getNombre()
+    {
         return $this->nombre;
     }
 
-    public function setNombre($nombre) {
+    public function setNombre($nombre)
+    {
         $this->nombre = $nombre;
         return $this;
     }
 
-    public function getRol() {
+    public function getRol()
+    {
         return $this->rol;
     }
 
-    public function setRol($rol) {
+    public function setRol($rol)
+    {
         $this->rol = $rol;
         return $this;
     }
 
-    public function getContrasena() {
+    public function getContrasena()
+    {
         return $this->contrasena;
     }
 
-    public function setContrasena($contrasena) {
+    public function setContrasena($contrasena)
+    {
         $this->contrasena = $contrasena;
         return $this;
     }
 
-    public function isActivo() {
+    public function isActivo()
+    {
         return $this->activo;
     }
 
-    public function setActivo($activo) {
+    public function setActivo($activo)
+    {
         $this->activo = $activo;
         return $this;
     }

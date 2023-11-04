@@ -35,10 +35,10 @@
                 </li>
 
                 <li>
-                    <a href="#" class="nav-btn-submenu"><i class="fas fa-pallet fa-fw"></i> &nbsp; Items <i class="fas fa-chevron-down"></i></a>
+                    <a href="#" class="nav-btn-submenu"><i class="fas fa-pallet fa-fw"></i> &nbsp; Productos <i class="fas fa-chevron-down"></i></a>
                     <ul>
                         <li>
-                            <a href="item-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; Agregar item</a>
+                            <a href="productos.php"><i class="fas fa-plus fa-fw"></i> &nbsp; CRUD Productos</a>
                         </li>
                         <li>
                             <a href="item-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de
@@ -56,7 +56,7 @@
                         Ventas <i class="fas fa-chevron-down"></i></a>
                     <ul>
                         <li>
-                            <a href="#nada"  id="nueva-venta"><i class="fas fa-plus fa-fw"></i> &nbsp; Nueva Venta</a>
+                            <a href="#nada" id="nueva-venta"><i class="fas fa-plus fa-fw"></i> &nbsp; Nueva Venta</a>
                         </li>
                         <li>
                             <a href="reservation-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp;
