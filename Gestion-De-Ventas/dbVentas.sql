@@ -17,7 +17,7 @@ create table Categorias (
 );
 create table Proveedores (
     ProveedoresID int primary key auto_increment,
-    nombre varchar(100),
+    nombre_proveedor varchar(100),
     contacto varchar(100),
     direccion varchar(500),
     activo boolean
