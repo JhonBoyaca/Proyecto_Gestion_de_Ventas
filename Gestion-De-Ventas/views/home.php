@@ -47,6 +47,7 @@ $usuarioID = $_SESSION["usuarioID"];
                     <h1>Bienvenido, <?php echo $correo; ?></h1>
                     <p>Rol: <?php echo $rol; ?></p>
                     <input type="hidden" id="usuarioID" value="<?php echo $usuarioID; ?>">
+                    <input type="hidden" id="rolUsuario" value="<?php echo $rol; ?>">
 
                     <!-- Aquí colocas el contenido de tu página -->
                 </div>
@@ -68,7 +69,7 @@ $usuarioID = $_SESSION["usuarioID"];
     </main>
     <script>
         var usuarioID = document.getElementById('usuarioID').value;
-        console.log('Usuario ID:', usuarioID);
+        var rolUsuario = document.getElementById('rolUsuario').value;
     </script>
 
     <?= $scripts ?>

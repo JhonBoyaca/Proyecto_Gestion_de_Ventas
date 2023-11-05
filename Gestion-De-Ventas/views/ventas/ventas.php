@@ -70,7 +70,15 @@ foreach ($productos as $producto) {
 
 
 <script>
-  
+    function generarTicket(id) {
+
+
+        // Construye la URL con el ID como parámetro
+        var url = "ventas/RPTVentas.php?id=" + id;
+
+        // Redirige al usuario a la nueva URL
+        window.open(url, "_blank");
+    }
 
     function registrarVenta() {
         console.log(productosAgregados)
@@ -85,16 +93,23 @@ foreach ($productos as $producto) {
                 totalVenta: totalVenta,
                 usuarioID: usuarioID
             },
-            success: function(res) {
-                console.LOG(res)
-                console.log('exito: ' + res)
-            },
-            error: function(error) {
-                // Manejar errores en la solicitud
-                console.error('Error:', error);
-            }
-        });
+        }).done(function(resp) {
+            console.log(resp);
+            if (resp) {
+                swal({
+                    title: "Venta registrada!!",
+                    icon: "success", // Agregar el ícono de éxito
+                    button: "Aceptar"
+                });
 
+                generarTicket(resp)
+                //limpiarform();
+            } else {
+                swal("Advertencia", "El registro no se guardo!", "warning");
+            }
+        }).fail(function(resp) {
+            console.log(resp);
+        });
     }
 
     document.getElementById('cantidadProducto').addEventListener('input', function() {
@@ -112,6 +127,9 @@ foreach ($productos as $producto) {
             }
         }
     });
+
+
+
     document.getElementById('miInput').addEventListener('input', function() {
         // Obtiene el valor seleccionado del datalist
         var selectedOption = document.querySelector('datalist option[value="' + this.value + '"]');
@@ -173,13 +191,13 @@ foreach ($productos as $producto) {
         var nombre = producto.nombre;
         var precio = producto.precio;
         var productoId = producto.id;
-
+        var stock = producto.stock;
 
         if (productoYaAgregado(productoId)) {
             // Si el producto ya está en el array, muestra una alerta de SweetAlert
             swal({
                 title: "Producto duplicado",
-                text: "El producto con ID " + productoId + " ya ha sido agregado.",
+                text: "El producto ya ha sido agregado.",
                 icon: "warning", // Puedes cambiar el icono según tus preferencias
             });
             return false;
@@ -191,12 +209,13 @@ foreach ($productos as $producto) {
             codigo: codigo,
             nombre: nombre,
             precio: precio,
-            cantidad: cantidad
+            cantidad: cantidad,
+            stock: stock
         };
-
+        //    console.log(productoAgregado)
         //Agrega el producto al array
         productosAgregados.push(productoAgregado);
-
+        console.log(productosAgregados)
         var total = productoAgregado.precio * productoAgregado.cantidad;
 
         // Obtén la referencia a la tabla
@@ -210,7 +229,14 @@ foreach ($productos as $producto) {
 
         var celdaNombre = $("<td>" + nombre + "</td>");
 
-        var celdaPrecio = $("<td><input type='number' id='" + productoId + "' class='precio-input' value='" + precio + "'></td>");
+        if (rolUsuario != 'admin') {
+
+            var celdaPrecio = $("<td><input type='number' id='" + productoId + "' class='precio-input'  value='" + precio + "' disabled></td>");
+
+        } else {
+            var celdaPrecio = $("<td><input type='number' id='" + productoId + "' class='precio-input'  value='" + precio + "'></td>");
+
+        }
 
         var celdaCantidad = $("<td><input type='number' id='" + productoId + "' class='cantidad-input' value='" + cantidad + "'></td>");
 
@@ -242,6 +268,11 @@ foreach ($productos as $producto) {
         });
 
         celdaPrecio.find('input').on('change', function() {
+
+            if (rolUsuario != 'admin') {
+                swal("Advertencia", "Solamente el administrador puede modificar el precio de venta", "warning");
+                return false;
+            }
             var nuevoPrecio = $(this).val();
             var nuevaCantidad = celdaCantidad.find('input').val();
             var subtotal = nuevaCantidad * nuevoPrecio;

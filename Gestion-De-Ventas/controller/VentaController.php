@@ -23,3 +23,5 @@ if ($_POST) {
         }
     }
 }
+
+echo $respuesta;

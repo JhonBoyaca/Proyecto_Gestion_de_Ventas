@@ -73,7 +73,31 @@ class DAOProductos
         $this->desconectar();
         return json_encode($resultado);
     }
-    
+
+    public function actualizarStock($idProducto, $nuevoStock)
+    {
+        $sql = "UPDATE productos SET stock = '$nuevoStock' WHERE productosID = $idProducto";
+        $this->conectar();
+
+        if ($this->con->query($sql)) {
+            // Éxito al actualizar el stock
+            $resultado = array(
+                "success" => true,
+                "message" => "Stock actualizado con éxito"
+            );
+        } else {
+            // Error al actualizar el stock
+            $resultado = array(
+                "success" => false,
+                "message" => "Error al actualizar el stock del producto"
+            );
+        }
+
+        $this->desconectar();
+        return json_encode($resultado);
+    }
+
+
     // Crear un arreglo asociativo con los datos
     public function encontrarProductoPorCodigo($codigo)
     {
@@ -90,6 +114,7 @@ class DAOProductos
                 "id" => $fila["productosID"],
                 "codigo" => $fila["codigo"],
                 "nombre" => $fila["nombre"],
+                "stock" => $fila["stock"],
                 "precio" => $fila["precio_venta"]
             );
 

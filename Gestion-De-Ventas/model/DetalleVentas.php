@@ -6,10 +6,49 @@ class DetalleVentas
     private $productosID;
     private $cantidad;
     private $activo;
+    private $precioVenta;
+    private $nombreProducto;
+    private $codigoProducto;
+
+
 
     public function __construct()
     {
         // Constructor vacío
+    }
+
+
+    public function getNombreProducto()
+    {
+        return $this->nombreProducto;
+    }
+
+    public function setNombreProducto($nombreProducto)
+    {
+        $this->nombreProducto = $nombreProducto;
+        return $this;
+    }
+
+    public function getCodigoProducto()
+    {
+        return $this->codigoProducto;
+    }
+
+    public function setCodigoProducto($codigoProducto)
+    {
+        $this->codigoProducto = $codigoProducto;
+        return $this;
+    }
+
+    public function getPrecioVenta()
+    {
+        return $this->precioVenta;
+    }
+
+    public function setPrecioVenta($precioVenta)
+    {
+        $this->precioVenta = $precioVenta;
+        return $this;
     }
 
     public function getDetalleID()
@@ -67,4 +106,3 @@ class DetalleVentas
         return $this;
     }
 }
-?>
