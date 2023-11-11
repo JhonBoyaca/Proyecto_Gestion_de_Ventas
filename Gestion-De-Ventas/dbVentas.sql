@@ -53,3 +53,36 @@ create table Detalle_ventas (
     foreign key(ventasID) references Ventas(ventasID),
 	foreign key(productosID) references Productos(productosID)
 );
+
+INSERT INTO Usuario (dui, correo, nombre, rol, contrasena, activo)
+VALUES ('987654321-0', 'admin@gmail.com', 'María González', 'admin', 'admin123', true);
+
+INSERT INTO Usuario (dui, correo, nombre, rol, contrasena, activo)
+VALUES ('456789123-0', 'gerente@gmail.com', 'Carlos Rodríguez', 'gerente', 'gerente123', true);
+
+INSERT INTO Usuario (dui, correo, nombre, rol, contrasena, activo)
+VALUES ('789123456-0', 'vendedor@gmail.com', 'Laura Martínez', 'vendedor', 'vendedor123', true);
+
+-- Registro 1
+INSERT INTO Categorias (nombre_categoria, descripcion, activo)
+VALUES ('Electrónica', 'Productos electrónicos y gadgets', true);
+
+-- Registro 2
+INSERT INTO Categorias (nombre_categoria, descripcion, activo)
+VALUES ('Ropa', 'Ropa de moda para todas las edades', true);
+
+-- Registro 3
+INSERT INTO Categorias (nombre_categoria, descripcion, activo)
+VALUES ('Hogar', 'Artículos para el hogar y decoración', true);
+
+-- Registro 1
+INSERT INTO Proveedores (nombre_proveedor, contacto, direccion, activo)
+VALUES ('Proveedor A', 'Juan Pérez', 'Calle 123, Ciudad A', true);
+
+-- Registro 2
+INSERT INTO Proveedores (nombre_proveedor, contacto, direccion, activo)
+VALUES ('Proveedor B', 'María González', 'Avenida 456, Ciudad B', true);
+
+-- Registro 3
+INSERT INTO Proveedores (nombre_proveedor, contacto, direccion, activo)
+VALUES ('Proveedor C', 'Carlos Rodríguez', 'Calle 789, Ciudad C', true);

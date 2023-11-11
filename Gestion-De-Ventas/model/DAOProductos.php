@@ -139,7 +139,7 @@ class DAOProductos
         $res = $this->con->query($sql);
 
         $html = "<table id='tabla' class='table table-hover table-sm'><thead>";
-        $html .= "<th>ID</th><th>NOMBRE</th><th>Precio Compra</th><th>Precio Venta</th><th>STOCK</th><th>STOCK MIN</th><th>CATEGORIA</th><th>PROVEEDOR</th><th>ACCIONES</th>";
+        $html .= "<th>ID</th><th>NOMBRE</th><th>Precio Compra</th><th>Precio Venta</th><th>STOCK</th><th>STOCK MIN</th><th>CATEGORIA</th><th>PROVEEDOR</th>";
         $html .= "</thead><tbody>";
 
         while ($fila = mysqli_fetch_assoc($res)) {
@@ -152,8 +152,6 @@ class DAOProductos
             $html .= "<td>" . $fila["stock_min"] . "</td>";
             $html .= "<td>" . mb_convert_encoding($fila["nombre_categoria"], 'UTF-8') . "</td>";
             $html .= "<td>" . mb_convert_encoding($fila["nombre_proveedor"], 'UTF-8') . "</td>";
-            $html .= "<td><a href=\"javascript:EliminarProducto('" . $fila["productosID"] . "')\"><img style='width:30px;' height='30px;' src='assets/img/Delete2.png'></a> &nbsp;";
-            $html .= "<a style='cursor:pointer;' data-bs-toggle=\"modal\" data-bs-target=\"#formIngresoProductos\" onclick=\"javascript:ModificarProducto('" . $fila["productosID"] . "','" . $fila["nombre"] . "','" . $fila["precio_compra"] . "','" . $fila["precio_venta"] . "','" . $fila["stock"] . "','" . $fila["stock_min"] . "','" . $fila["categoriasID"] . "','" . $fila["ProveedoresID"] . "')\"><img style='width:30px;' height='30px;' src='assets/img/update.png'></a></td>";
             $html .= "</tr>";
         }
         $html .= "</tbody></table>";

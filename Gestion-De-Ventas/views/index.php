@@ -24,6 +24,7 @@ if ($_POST) {
     }
 }
 
+
 if ($_GET) {
 
     if (isset($_GET["cerrar"])) {
@@ -60,6 +61,7 @@ if ($_GET) {
                     <label for "UserPassword" class="bmd-label-floating"><i class="fas fa-key"></i> &nbsp;Contraseña</label>
                     <input type="password" class="form-control" id="txtContrasena" name="txtContrasena" minlength="7" required>
                     <small class="form-text text-muted">La contraseña debe tener al menos 7 caracteres.</small>
+                    <a href="reset_password.php">¿Olvidaste tu contraseña?</a>
                 </div>
                 <input type="submit" name="btnLogin" value="Iniciar Sesion" class="btn-login text-center">
             </form>

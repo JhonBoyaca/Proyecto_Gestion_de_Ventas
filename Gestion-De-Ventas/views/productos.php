@@ -113,7 +113,7 @@ if (!isset($_SESSION["correo"])) {
                 }).done(function(resp) {
                     console.log(resp);
                     if (resp == true) {
-                        swal("Guardado con exito!");
+                        swal("¡Bien!", "El producto fue guardado con exito!", "success");
                         $("#btnCerrarModal").click();
                         getTabla();
                         limpiarform();
@@ -139,7 +139,7 @@ if (!isset($_SESSION["correo"])) {
         <!-- Page content -->
         <section class="full-box page-content">
             <nav class="full-box navbar-info">
-                <a href="#" class="float-left show-nav-lateral">
+                <a href="#" style="float: left;" class="show-nav-lateral">
                     <i class="fas fa-exchange-alt"></i>
                 </a>
 
@@ -190,15 +190,15 @@ if (!isset($_SESSION["correo"])) {
             <div class="modal-body">
                 <form id="formNuevoProducto">
                     <input type="hidden" id="txtIdProducto" name="txtIdProducto">
-                    <input type="text" placeholder="Nombre Producto" class="form-control" name="txtNombre" id="txtNombre">
-                    <input type="number" placeholder="Precio Compra" class="form-control" name="txtprecioCom" id="txtprecioCom">
-                    <input type="number" placeholder="Precio Venta" class="form-control" name="txtprecioVen" id="txtprecioVen">
-                    <input type="number" placeholder="Stock" class="form-control" name="txtStock" id="txtStock">
-                    <input type="number" placeholder="Stock Minimo" class="form-control" name="txtStockMin" id="txtStockMin">
+                    <input type="text" placeholder="Nombre Producto" class="form-control" name="txtNombre" id="txtNombre"><br>
+                    <input type="number" placeholder="Precio Compra" class="form-control" name="txtprecioCom" id="txtprecioCom"><br>
+                    <input type="number" placeholder="Precio Venta" class="form-control" name="txtprecioVen" id="txtprecioVen"><br>
+                    <input type="number" placeholder="Stock" class="form-control" name="txtStock" id="txtStock"><br>
+                    <input type="number" placeholder="Stock Minimo" class="form-control" name="txtStockMin" id="txtStockMin"><br>
                     <label class="badge bg-success">Categoria de Producto</label>
                     <select name="cmbIdCategoria" id="cmbIdCategoria" class="form-control">
 
-                    </select>
+                    </select><br>
                     <label class="badge bg-success">Nombre Proveedor</label>
                     <select name="cmbIdProveedor" id="cmbIdProveedor" class="form-control">
 

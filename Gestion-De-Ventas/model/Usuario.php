@@ -8,6 +8,7 @@ class Usuario
     private $rol;
     private $contrasena;
     private $activo;
+    private $token_reset; // Nuevo atributo para token de restablecimiento
 
     public function __construct()
     {
@@ -88,6 +89,17 @@ class Usuario
     public function setActivo($activo)
     {
         $this->activo = $activo;
+        return $this;
+    }
+
+    public function getTokenReset()
+    {
+        return $this->token_reset;
+    }
+
+    public function setTokenReset($token_reset)
+    {
+        $this->token_reset = $token_reset;
         return $this;
     }
 }

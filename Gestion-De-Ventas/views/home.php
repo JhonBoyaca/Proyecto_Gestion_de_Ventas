@@ -34,7 +34,7 @@ $usuarioID = $_SESSION["usuarioID"];
         <!-- Page content -->
         <section class="full-box page-content">
             <nav class="full-box navbar-info">
-                <a href="#" class="float-left show-nav-lateral">
+                <a href="#" style="float: left;" class="show-nav-lateral">
                     <i class="fas fa-exchange-alt"></i>
                 </a>
 

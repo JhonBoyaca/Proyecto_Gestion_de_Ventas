@@ -75,18 +75,13 @@
 
                 <li>
                     <a href="#" class="nav-btn-submenu"><i class="fas  fa-user-secret fa-fw"></i> &nbsp;
-                        Usuarios <i class="fas fa-chevron-down"></i></a>
+                        Reportes <i class="fas fa-chevron-down"></i></a>
                     <ul>
                         <li>
-                            <a href="user-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; Nuevo usuario</a>
+                            <a href="reportes.php"><i class="fas fa-plus fa-fw"></i> &nbsp;Productos Existentes</a>
                         </li>
                         <li>
-                            <a href="user-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de
-                                usuarios</a>
-                        </li>
-                        <li>
-                            <a href="user-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar
-                                usuario</a>
+                            <a href="reportesStockMin.php"><i class="fas fa-plus fa-fw"></i> &nbsp;Productos Stock Min</a>
                         </li>
                     </ul>
                 </li>
