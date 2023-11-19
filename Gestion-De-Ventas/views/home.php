@@ -1,19 +1,7 @@
 <?php
 $cdns = file_get_contents("plugins/encabezados.php");
 $scripts = file_get_contents("plugins/scripts.php");
-$menu = file_get_contents("plugins/menu.php");
-
-
-
-session_start();
-
-if (!isset($_SESSION["correo"])) {
-    header("Location:index.php");
-}
-
-$correo = $_SESSION["correo"];
-$rol = $_SESSION["rol"];
-$usuarioID = $_SESSION["usuarioID"];
+$menu = include("plugins/menu.php");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -30,7 +18,6 @@ $usuarioID = $_SESSION["usuarioID"];
     <!-- Main container -->
     <main class="full-box main-container">
         <?= $menu ?>
-
         <!-- Page content -->
         <section class="full-box page-content">
             <nav class="full-box navbar-info">
@@ -45,7 +32,7 @@ $usuarioID = $_SESSION["usuarioID"];
                 <div class="container" id="content-container">
 
                     <h1>Bienvenido, <?php echo $correo; ?></h1>
-                    <p>Rol: <?php echo $rol; ?></p>
+                    <p>Rol: <?php echo $rol; ?> </p>
                     <input type="hidden" id="usuarioID" value="<?php echo $usuarioID; ?>">
                     <input type="hidden" id="rolUsuario" value="<?php echo $rol; ?>">
 

@@ -100,9 +100,13 @@ foreach ($productos as $producto) {
                     title: "Venta registrada!!",
                     icon: "success", // Agregar el ícono de éxito
                     button: "Aceptar"
+                }).then((value) => {
+                    if (value) {
+                        generarTicket(resp);
+                        // Recarga la página después de registrar la venta
+                        location.reload();
+                    }
                 });
-
-                generarTicket(resp)
                 //limpiarform();
             } else {
                 swal("Advertencia", "El registro no se guardo!", "warning");
@@ -154,11 +158,9 @@ foreach ($productos as $producto) {
         // Verificar si los valores son nulos o vacíos
         if (!codigo || !cantidad || codigo.trim() == '' || cantidad.trim() == '') {
             // Mostrar una alerta dulce
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Por favor, ingrese un código de producto y una cantidad válida.',
-            });
+
+
+            swal("Advertencia", "Por favor, ingrese un código de producto y una cantidad válida.", "warning");
         } else {
 
             encontrarProductoPorCodigo(codigo, cantidad);
@@ -258,6 +260,18 @@ foreach ($productos as $producto) {
                 return producto.id === productoId;
             });
 
+            if (productoAgregado.stock < nuevaCantidad) {
+
+                swal({
+                    icon: 'warning',
+                    title: 'No contamos con esa cantidad en stock',
+                    text: 'Por favor, ingrese una cantidad menor.',
+                });
+                // Setea el valor a 0
+                $(this).val(1);
+                return false;
+            }
+
             // Actualiza la cantidad y el subtotal en el objeto
             productoAgregado.cantidad = nuevaCantidad;
 
@@ -321,7 +335,9 @@ foreach ($productos as $producto) {
             dataType: "json",
             success: function(producto) {
                 if (producto) {
-                    var producto = JSON.parse(producto);
+                    console.log(producto)
+
+                    var producto = producto;
 
                     agregarProductoATabla(producto, cantidad);
                 } else {
