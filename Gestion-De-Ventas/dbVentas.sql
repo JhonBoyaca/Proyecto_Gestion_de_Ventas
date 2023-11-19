@@ -63,6 +63,9 @@ VALUES ('456789123-0', 'gerente@gmail.com', 'Carlos Rodríguez', 'gerente', 'ger
 INSERT INTO Usuario (dui, correo, nombre, rol, contrasena, activo)
 VALUES ('789123456-0', 'vendedor@gmail.com', 'Laura Martínez', 'vendedor', 'vendedor123', true);
 
+INSERT INTO Usuario (dui, correo, nombre, rol, contrasena, activo)
+VALUES ('789123226-0', 'empleado@gmail.com', 'Cecilia Belloso', 'empleado', 'empleado123', true);
+
 -- Registro 1
 INSERT INTO Categorias (nombre_categoria, descripcion, activo)
 VALUES ('Electrónica', 'Productos electrónicos y gadgets', true);
