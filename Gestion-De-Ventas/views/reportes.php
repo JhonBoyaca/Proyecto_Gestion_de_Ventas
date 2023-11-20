@@ -104,10 +104,17 @@ if (!isset($_SESSION["correo"])) {
             <div class="full-box content">
                 <!-- Aquí debes colocar el contenido de tu página -->
                 <div class="container" id="content-container">
-                    <h3>Gestion de reportes</h3>
+                    <h1 class="text-center">GESTION DE REPORTES</h1>
                     <hr>
-                    <button class="btn btn-warning" onclick="exportToExcel()">Exportar a Excel</button>
-                    <button id="export-pdf" class="btn btn-danger" onclick="exportToPDF()">Exportar a PDF</button>
+                    <hr>
+                    <h3>Gestion de Reportes de Productos Existentes</h3>
+                    <hr>
+                    <button class="btn btn-outline-success btn-sm" onclick="exportToExcel()">
+                        <img src="assets/img/excel.png" style="width: 30px; height: 30px;">
+                        Exportar a Excel</button>
+                    <button id="export-pdf" class="btn btn-outline-danger btn-sm" onclick="exportToPDF()">
+                        <img src="assets/img/PDF.png" style="width: 30px; height: 30px;">
+                        Exportar a PDF</button>
                     <hr>
                     <div id="tablaHtml">
                     </div>

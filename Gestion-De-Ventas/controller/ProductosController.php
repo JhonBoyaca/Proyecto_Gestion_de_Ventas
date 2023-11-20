@@ -58,6 +58,9 @@ if ($_POST) {
                 }
 
                 break;
+            case "getExcelStockMin":
+                $respuesta = $dao->getExcelStockMin();
+                break;
         }
     }
 }

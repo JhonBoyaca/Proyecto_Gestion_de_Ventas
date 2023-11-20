@@ -16,9 +16,15 @@ if ($_POST) {
 
             case "registrarVenta":
                 $productosAgregados = $_POST["arrayProducto"];
-                $totalVenta = $_POST["totalVenta"];  
-                $usuarioID = $_POST["usuarioID"];             
-                $respuesta = $daoVentas->registrarVenta($productosAgregados, $totalVenta,$usuarioID);
+                $totalVenta = $_POST["totalVenta"];
+                $usuarioID = $_POST["usuarioID"];
+                $respuesta = $daoVentas->registrarVenta($productosAgregados, $totalVenta, $usuarioID);
+                break;
+
+            case "getExcelVentaRango":
+                $desde = $_POST["desde"];
+                $hasta = $_POST["hasta"];
+                $daoVentas->getExcelVentaRango($desde, $hasta);
                 break;
         }
     }

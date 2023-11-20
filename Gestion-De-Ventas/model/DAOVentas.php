@@ -4,6 +4,13 @@ require_once "Ventas.php";
 require_once "DetalleVentas.php";
 require_once "DAOProductos.php"; // Ajusta la ruta según la ubicación real de tu clase
 
+//para lo de excel
+require_once __DIR__ . '/../views/Reportes/vendor/autoload.php';
+
+use FontLib\Table\Type\head;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+///////////////////////////////////////////////////////////
 class DAOVentas
 {
     private $con;
@@ -88,7 +95,7 @@ class DAOVentas
             $detalleVenta->setNombreProducto($fila['nombre']);
             $detalleVenta->setCodigoProducto($fila['codigo']);
             $detalleVenta->setPrecioVenta($fila['precio_venta']);
-     
+
 
             $detallesVenta[] = $detalleVenta;
         }
@@ -195,5 +202,89 @@ class DAOVentas
             $this->desconectar();
             return false; // Error
         }
+    }
+
+    public function rptVentasPorRango($desde, $hasta)
+    {
+        $sql = "SELECT v.ventasID, v.fecha, v.total, u.nombre as nombre_usuario ";
+        $sql .= "FROM Ventas v ";
+        $sql .= "INNER JOIN Usuario u ON v.usuarioID = u.usuarioID ";
+        $sql .= "WHERE v.fecha BETWEEN '$desde' AND '$hasta'";
+
+        $this->conectar();
+        $res = $this->con->query($sql);
+
+        $html = "<table class='table'><thead>";
+        $html .= "<th>ID</th><th>NOMBRE</th><th>FECHA</th><th>TOTAL</th>";
+        $html .= "</thead><tbody>";
+
+        $cont = 0;
+        while ($fila = mysqli_fetch_assoc($res)) {
+            $html .= "<tr>";
+            $html .= "<td>" . $fila["ventasID"] . "</td>";
+            $html .= "<td>" . $fila["nombre_usuario"] . "</td>";
+            $html .= "<td>" . $fila["fecha"] . "</td>";
+            $html .= "<td>$" . $fila["total"] . "</td>";
+            $html .= "</tr>";
+            $cont++;
+        }
+        $html .= "</tbody></table>";
+        $res->close();
+        $this->desconectar();
+        $data = array();
+        $data[] = $html;
+        $data[] = $cont;
+
+        return $data;
+    }
+
+    public function getExcelVentaRango($desde, $hasta)
+    {
+        $sql = "SELECT v.ventasID, v.fecha, v.total, u.nombre as nombre_usuario ";
+        $sql .= "FROM Ventas v ";
+        $sql .= "INNER JOIN Usuario u ON v.usuarioID = u.usuarioID ";
+        $sql .= "WHERE v.fecha BETWEEN '$desde' AND '$hasta'";
+
+        $this->conectar();
+        $res = $this->con->query($sql);
+
+        $excel = new Spreadsheet();
+        $hojaActiva = $excel->getActiveSheet();
+        $hojaActiva->setTitle("VENTAS POR RANGO DE FECHA");
+        $hojaActiva->getStyle('A4:D4')->getBorders()->getBottom()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
+
+        //ENCABEZADO
+        $hojaActiva->setCellValue("A2", "PROYECTO FINAL");
+        $hojaActiva->setCellValue("B2", "GESTION DE VENTAS");
+        $hojaActiva->setCellValue("C2", "GRUPO DS39A");
+
+        //ENCABEZADOS DE LA TABLA 
+        $hojaActiva->getColumnDimension("A")->setWidth(25);
+        $hojaActiva->setCellValue("A4", "ID VENTA");
+        $hojaActiva->getColumnDimension("B")->setWidth(25);
+        $hojaActiva->setCellValue("B4", "NOMBRE");
+        $hojaActiva->getColumnDimension("C")->setWidth(25);
+        $hojaActiva->setCellValue("C4", "FECHA");
+        $hojaActiva->getColumnDimension("D")->setWidth(30);
+        $hojaActiva->setCellValue("D4", "TOTAL");
+
+        //LOS REGISTROS DE LA BASE DE DATOS
+        $fila = 5;
+        while ($filas = $res->fetch_assoc()) {
+            $hojaActiva->setCellValue("A" . $fila, $filas["ventasID"]);
+            $hojaActiva->setCellValue("B" . $fila, $filas["nombre_usuario"]);
+            $hojaActiva->setCellValue("C" . $fila, $filas["fecha"]);
+            $hojaActiva->setCellValue("D" . $fila, $filas["total"]);
+            $fila++;
+        }
+
+        //ENVIAR ENCABEZADOS
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="ReporteVentasPorRangoFecha.xlsx"');
+        header('Cache-Control: max-age=0');
+
+        $writer = IOFactory::createWriter($excel, "Xlsx");
+        $writer->save('php://output');
+        exit;
     }
 }

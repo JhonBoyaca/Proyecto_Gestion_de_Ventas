@@ -9,6 +9,15 @@ if (!isset($_SESSION["correo"])) {
     header("Location:index.php");
 }
 
+if ($_POST) {
+    if (isset($_POST["txtDesde"]) && isset($_POST["txtHasta"])) {
+        $desde = $_POST["txtDesde"];
+        $hasta = $_POST["txtHasta"];
+        header("location:Reportes/rptVentasRango.php?desde=$desde&hasta=$hasta");
+    } else {
+        echo 'No estas enviando alguna de la fechas.....';
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -19,98 +28,20 @@ if (!isset($_SESSION["correo"])) {
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <?= $cdns ?>
 
-    <script>
-        function getTabla() {
-
-            $.ajax({
-                url: "../controller/ProductosController.php",
-                type: "post",
-                data: {
-                    key: "get1"
-                }
-            }).done(function(resp) {
-                $("#tablaHtml").empty();
-                $("#tablaHtml").append(resp);
-                $("#tabla").DataTable({
-                    searching: true,
-                    language: {
-                        "info": "Mostrando _START_ a _END_ de _TOTAL_ Registros",
-                        "lengthMenu": "Mostrar _MENU_ Registros",
-                        "Search": "Buscar",
-                        "paginate": {
-                            "first": "Primero",
-                            "last": "Ultima",
-                            "next": "Siguiente",
-                            "previous": "Anterior"
-                        }
-                    },
-                    buttons: [{
-                            extend: 'copy',
-                            text: 'Copiar',
-                            className: 'btn btn-primary'
-                        },
-                        {
-                            extend: 'excel',
-                            text: 'Exportar a Excel',
-                            className: 'btn btn-success'
-                        },
-                        {
-                            extend: 'pdf',
-                            text: 'Exportar a PDF',
-                            className: 'btn btn-danger'
-                        },
-                        {
-                            extend: 'print',
-                            text: 'Imprimir',
-                            className: 'btn btn-info'
-                        },
-                    ],
-                });
-
-            }).fail(function() {
-                console.log("Error al recuperar datos (funcion get())")
-            });
-
-        }
-
-        function reporteStockMinimo() {
-            $.ajax({
-                url: "../controller/ProductosController.php",
-                type: "post",
-                data: {
-                    key: "reporteStockMinimo"
-                }
-            }).done(function(resp) {
-                $("#tablaHtml").empty();
-                $("#tablaHtml").append(resp);
-                $("#tabla").DataTable({
-                    searching: true,
-                    language: {
-                        "info": "Mostrando _START_ a _END_ de _TOTAL_ Registros",
-                        "lengthMenu": "Mostrar _MENU_ Registros",
-                        "Search": "Buscar",
-                        "paginate": {
-                            "first": "Primero",
-                            "last": "Ultima",
-                            "next": "Siguiente",
-                            "previous": "Anterior"
-                        }
-                    }
-                });
-            }).fail(function() {
-                console.log("Error al recuperar datos del reporte de stock mínimo");
-            });
-        }
-
-        $(document).ready(function() {
-            reporteStockMinimo()
-        });
-    </script>
-    <title>Reportes</title>
+    <title>Reportes Con Stock Min</title>
 </head>
 
 <body>
-
+    <style>
+        .custom-input {
+            background-image: url('assets/img/PDF.png');
+            background-size: 30px 30px;
+            background-repeat: no-repeat;
+            background-position: left center;
+            padding-left: 40px;
+            border: 1px solid #dc3545;
+        }
+    </style>
     <!-- Main container -->
     <main class="full-box main-container">
         <?= $menu ?>
@@ -133,16 +64,60 @@ if (!isset($_SESSION["correo"])) {
             <div class="full-box content">
                 <!-- Aquí debes colocar el contenido de tu página -->
                 <div class="container" id="content-container">
-                    <h3>Gestion de reportes</h3>
+                    <h1 class="text-center">GESTION DE REPORTES</h1>
                     <hr>
-                    <button class="btn btn-success" onclick="reporteStockMinimo()">Reporte de Productos con Stock al Mínimo</button>
-                    <button class="btn btn-warning" onclick="exportToExcel()">Exportar a Excel</button>
-                    <button id="export-pdf" class="btn btn-danger" onclick="exportToPDF()">Exportar a PDF</button>
                     <hr>
-                    <div id="tablaHtml">
-                    </div>
-
+                    <h3>Gestion de reportes de Productos con stock al minimo</h3>
+                    <hr>
+                    <h5>Aqui podras realizar la descarga de los reportes en PDF o EXCEL de los Productos con al minino de 50 UND</h5>
+                    <hr>
+                    <a href="Reportes/rptStockMin.php" target="_blank" class="btn btn-outline-danger btn-sm">
+                        <img src="assets/img/PDF.png" style="width: 30px; height: 30px;">
+                        Reporte Productos Con Stock al Min
+                    </a>
+                    <hr>
+                    <form method="post" action="../controller/ProductosController.php" target="_blank">
+                        <input type="hidden" name="key" value="getExcelStockMin">
+                        <button class="btn btn-outline-success btn-sm">
+                            <img src="assets/img/excel.png" style="width: 30px; height: 30px;">
+                            Reporte Productos Con al Stock Min
+                        </button>
+                    </form>
+                    <hr>
+                    <hr>
+                    <h3>Gestion de reportes de Ventas por rango de fecha</h3>
+                    <hr>
+                    <h5>Aqui podras realizar la descarga de los reportes en PDF o EXCEL de las ventas por rango de fecha</h5>
+                    <hr>
+                    <form action="reportesStockMin.php" method="post" target="_blank">
+                        <label for="">Desde la Fecha</label>
+                        <input type="date" name="txtDesde" id="txtDesde" class="form-control">
+                        <label for="">Hasta la Fecha</label>
+                        <input type="date" name="txtHasta" id="txtHasta" class="form-control">
+                        <br>
+                        <input type="submit" value="Reporte Ventas Por Rangos" class="btn btn-outline-danger custom-input">
+                    </form>
+                    <script>
+                        $("#txtHasta").blur(function() {
+                            var desde = $("#txtDesde").val();
+                            var hasta = $("#txtHasta").val();
+                            $("#desde").val(desde);
+                            $("#hasta").val(hasta);
+                        });
+                    </script>
+                    <form method="post" action="../controller/VentaController.php" target="_blank">
+                        <input type="hidden" name="key" value="getExcelVentaRango">
+                        <input type="hidden" name="desde" id="desde">
+                        <input type="hidden" name="hasta" id="hasta"><br>
+                        <button class="btn btn-outline-success btn-sm">
+                            <img src="assets/img/excel.png" style="width: 30px; height: 30px;">
+                            Reporte Ventas Por Rangos
+                        </button>
+                    </form>
+                    <hr>
+                    <hr>
                 </div>
+            </div>
 
 
 
@@ -153,111 +128,7 @@ if (!isset($_SESSION["correo"])) {
     <?= $scripts ?>
 
     <script src="./js/codigo.js"></script>
-    <script>
-        // Función para exportar a Excel
-        function exportToExcel() {
-            // Obtén la instancia de la DataTable
-            var dataTable = $('#tabla').DataTable();
 
-            // Comprueba si los datos están disponibles
-            if (dataTable.data().count() === 0) {
-                console.log("No hay datos para exportar a Excel.");
-                return;
-            }
-
-            // Utiliza la función buttons.exportData() para exportar los datos
-            var data = dataTable.buttons.exportData({
-                modifier: {
-                    search: 'applied'
-                }
-            });
-
-            // Continúa con el proceso de exportación
-            var header = data.header;
-            var body = data.body;
-
-            if (body.length === 0) {
-                console.log("No hay datos para exportar a Excel.");
-                return;
-            }
-
-            // Crear una tabla HTML para exportar a Excel
-            var table = $('<table></table>');
-            var titleRow = $('<thead><tr><th colspan="' + header.length + '">Reporte Productos Existentes</th></tr></thead>').appendTo(table);
-            var headerRow = $('<thead></thead>').appendTo(table);
-
-            // Agrega la fila de encabezado
-            var headerCells = headerRow.append('<tr></tr>');
-            for (var i = 0; i < header.length; i++) {
-                headerCells.append('<th>' + header[i] + '</th>');
-            }
-
-            var bodyRows = $('<tbody></tbody>').appendTo(table);
-
-            // Agrega las filas de datos
-            for (var i = 0; i < body.length; i++) {
-                var rowData = body[i];
-                var bodyRow = $('<tr></tr>').appendTo(bodyRows);
-
-                for (var j = 0; j < rowData.length; j++) {
-                    bodyRow.append('<td>' + rowData[j] + '</td>');
-                }
-            }
-
-            // Crea un archivo Excel
-            var excelData = 'data:application/vnd.ms-excel;base64,' + btoa(table[0].outerHTML);
-            var link = document.createElement("a");
-            link.href = excelData;
-            link.download = "Reporte-Productos-Existentes.xls";
-            link.click();
-        }
-
-
-        function exportToPDF() {
-            // Actualiza los datos antes de generar el PDF
-            getTabla();
-
-            // Obtén la instancia de la DataTable
-            const dataTable = $('#tabla').DataTable();
-
-            // Obtén los datos de la DataTable
-            const tableData = [];
-            dataTable.rows().every(function() {
-                const rowData = this.data();
-                tableData.push(rowData);
-            });
-
-            // Obtén los encabezados de la DataTable
-            const tableHeaders = [];
-            $('#tabla thead th').each(function() {
-                tableHeaders.push($(this).text());
-            });
-
-            // Genera el PDF y descárgalo automáticamente
-            pdfMake.createPdf({
-                content: [{
-                        text: 'Reporte De Productos Existentes',
-                        style: 'header'
-                    },
-                    {
-                        table: {
-                            headerRows: 1,
-                            widths: tableHeaders.map(() => 'auto'), // Ancho automático para cada columna
-                            body: [tableHeaders].concat(tableData), // Agrega los encabezados seguidos de los datos
-                        },
-                    },
-                ],
-                styles: {
-                    header: {
-                        fontSize: 18,
-                        bold: true,
-                        alignment: 'center',
-                        margin: [0, 0, 0, 20],
-                    },
-                },
-            }).download('Reporte-Productos-Existentes.pdf');
-        }
-    </script>
 </body>
 
 </html>

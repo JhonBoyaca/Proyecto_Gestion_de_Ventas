@@ -18,7 +18,7 @@ $usuarioID = $_SESSION["usuarioID"];
             <i class="far fa-times-circle show-nav-lateral"></i>
             <img src="./assets/avatar/Avatar.png" class="img-fluid" alt="Avatar">
             <figcaption class="roboto-medium text-center">Correo: <?php echo $correo; ?>
-                <br>Rol: <?php echo $rol; ?>
+                <br><?php echo $rol; ?>
 
             </figcaption>
         </figure>
@@ -34,14 +34,7 @@ $usuarioID = $_SESSION["usuarioID"];
                         <li>
                             <a href="productos.php"><i class="fas fa-plus fa-fw"></i> &nbsp; CRUD Productos</a>
                         </li>
-                        <li>
-                            <a href="item-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de
-                                items</a>
-                        </li>
-                        <li>
-                            <a href="item-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar
-                                item</a>
-                        </li>
+
                     </ul>
                 </li>
 
@@ -78,10 +71,7 @@ $usuarioID = $_SESSION["usuarioID"];
                                 <a href="reportes.php"><i class="fas fa-plus fa-fw"></i> &nbsp;Productos Existentes</a>
                             </li>
                             <li>
-                                <a href="reportesStockMin.php"><i class="fas fa-plus fa-fw"></i> &nbsp;Productos Stock Min</a>
-                            </li>
-                            <li>
-                                <a href="reportesStockMin.php"><i class="fas fa-plus fa-fw"></i> &nbsp;Ventas</a>
+                                <a href="reportesStockMin.php"><i class="fas fa-plus fa-fw"></i> &nbsp;PROD Stock & Ventas Rango</a>
                             </li>
                         </ul>
                     </li>
