@@ -1,13 +1,9 @@
 <?php
 $cdns = file_get_contents("plugins/encabezados.php");
 $scripts = file_get_contents("plugins/scripts.php");
-$menu = file_get_contents("plugins/menu.php");
+$menu = include("plugins/menu.php");
 
-session_start();
 
-if (!isset($_SESSION["correo"])) {
-    header("Location:index.php");
-}
 
 if ($_POST) {
     if (isset($_POST["txtDesde"]) && isset($_POST["txtHasta"])) {
