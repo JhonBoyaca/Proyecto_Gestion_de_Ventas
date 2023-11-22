@@ -269,6 +269,7 @@ foreach ($productos as $producto) {
                 });
                 // Setea el valor a 0
                 $(this).val(1);
+                
                 return false;
             }
 
