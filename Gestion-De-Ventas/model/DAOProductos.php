@@ -138,7 +138,7 @@ class DAOProductos
 
     public function get1()
     {
-        $sql = "select p.categoriasID, p.ProveedoresID, p.productosID,p.nombre, p.precio_compra,p.precio_venta, p.stock, p.stock_min, c.nombre_categoria, ";
+        $sql = "select p.categoriasID, p.ProveedoresID, p.productosID,p.codigo,p.nombre, p.precio_compra,p.precio_venta, p.stock, p.stock_min, c.nombre_categoria, ";
         $sql .= "pro.nombre_proveedor from productos p inner join categorias c on ";
         $sql .= "p.categoriasID = c.categoriasID inner join proveedores pro on p.ProveedoresID= ";
         $sql .= "pro.ProveedoresID";
@@ -147,12 +147,13 @@ class DAOProductos
         $res = $this->con->query($sql);
 
         $html = "<table id='tabla' class='table table-hover table-sm'><thead>";
-        $html .= "<th>ID</th><th>NOMBRE</th><th>Precio Compra</th><th>Precio Venta</th><th>STOCK</th><th>STOCK MIN</th><th>CATEGORIA</th><th>PROVEEDOR</th>";
+        $html .= "<th>ID</th><th>Codigo</th><th>NOMBRE</th><th>Precio Compra</th><th>Precio Venta</th><th>STOCK</th><th>STOCK MIN</th><th>CATEGORIA</th><th>PROVEEDOR</th>";
         $html .= "</thead><tbody>";
 
         while ($fila = mysqli_fetch_assoc($res)) {
             $html .= "<tr>";
             $html .= "<td>" . $fila["productosID"] . "</td>";
+            $html .= "<td>" . mb_convert_encoding($fila["codigo"], 'UTF-8') . "</td>";
             $html .= "<td>" . mb_convert_encoding($fila["nombre"], 'UTF-8') . "</td>";
             $html .= "<td>" . $fila["precio_compra"] . "</td>";
             $html .= "<td>" . $fila["precio_venta"] . "</td>";
@@ -200,8 +201,10 @@ class DAOProductos
     public function agregar(Productos $pro)
     {
         $this->conectar();
-        $statement = $this->con->prepare("insert into productos (nombre, precio_compra, precio_venta, stock, stock_min, categoriasID, ProveedoresID)values(?,?,?,?,?,?,?)");
+        $statement = $this->con->prepare("insert into productos (codigo,nombre, precio_compra, precio_venta, stock, stock_min, categoriasID, ProveedoresID)values(?,?,?,?,?,?,?,?)");
+        $codigo = $pro->getCodigo();
         $nombre = $pro->getNombre();
+
         $precio_compra = $pro->getPrecioCompra();
         $precio_venta = $pro->getPrecioVenta();
         $stock = $pro->getStock();
@@ -210,7 +213,8 @@ class DAOProductos
         $idProveedor = $pro->getProveedoresID();
 
         $statement->bind_param(
-            "sssiiii",
+            "ssssiiii",
+            $codigo,
             $nombre,
             $precio_compra,
             $precio_venta,

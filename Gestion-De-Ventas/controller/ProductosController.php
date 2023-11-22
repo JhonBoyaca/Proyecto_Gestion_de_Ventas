@@ -44,6 +44,7 @@ if ($_POST) {
                 //vamos hacer que en la vista se envie la key "data" y trae la data del form
                 parse_str($_POST["data"], $data);
                 $producto->setNombre($data["txtNombre"]);
+                $producto->setCodigo($data["txtCodigo"]);
                 $producto->setPrecioCompra($data["txtprecioCom"]);
                 $producto->setPrecioVenta($data["txtprecioVen"]);
                 $producto->setStock($data["txtStock"]);

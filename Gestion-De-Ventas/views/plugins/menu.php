@@ -88,3 +88,9 @@ $usuarioID = $_SESSION["usuarioID"];
         </nav>
     </div>
 </section>
+<input type="hidden" id="usuarioID" value="<?php echo $usuarioID; ?>">
+<input type="hidden" id="rolUsuario" value="<?php echo $rol; ?>">
+<script>
+    var usuarioID = document.getElementById('usuarioID').value;
+    var rolUsuario = document.getElementById('rolUsuario').value;
+</script>

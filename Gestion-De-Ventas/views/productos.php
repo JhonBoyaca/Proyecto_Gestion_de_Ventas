@@ -185,6 +185,7 @@ $menu = include("plugins/menu.php");
             <div class="modal-body">
                 <form id="formNuevoProducto">
                     <input type="hidden" id="txtIdProducto" name="txtIdProducto">
+                    <input type="text" placeholder="Codigo" class="form-control" name="txtCodigo" id="txtCodigo"><br>
                     <input type="text" placeholder="Nombre Producto" class="form-control" name="txtNombre" id="txtNombre"><br>
                     <input type="number" placeholder="Precio Compra" class="form-control" name="txtprecioCom" id="txtprecioCom"><br>
                     <input type="number" placeholder="Precio Venta" class="form-control" name="txtprecioVen" id="txtprecioVen"><br>

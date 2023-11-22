@@ -2,6 +2,8 @@
 $cdns = file_get_contents("plugins/encabezados.php");
 $scripts = file_get_contents("plugins/scripts.php");
 $menu = include("plugins/menu.php");
+$rol = $_SESSION["rol"];
+$usuarioID = $_SESSION["usuarioID"];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -14,7 +16,6 @@ $menu = include("plugins/menu.php");
 </head>
 
 <body>
-
     <!-- Main container -->
     <main class="full-box main-container">
         <?= $menu ?>
@@ -33,9 +34,6 @@ $menu = include("plugins/menu.php");
 
                     <h1>Bienvenido, <?php echo $correo; ?></h1>
                     <p>Rol: <?php echo $rol; ?> </p>
-                    <input type="hidden" id="usuarioID" value="<?php echo $usuarioID; ?>">
-                    <input type="hidden" id="rolUsuario" value="<?php echo $rol; ?>">
-
                     <!-- Aquí colocas el contenido de tu página -->
                 </div>
                 <!-- Content of the page header, such as titles, etc. -->
@@ -55,8 +53,7 @@ $menu = include("plugins/menu.php");
         </section>
     </main>
     <script>
-        var usuarioID = document.getElementById('usuarioID').value;
-        var rolUsuario = document.getElementById('rolUsuario').value;
+
     </script>
 
     <?= $scripts ?>

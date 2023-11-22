@@ -81,9 +81,7 @@ foreach ($productos as $producto) {
     }
 
     function registrarVenta() {
-        console.log(productosAgregados)
-        console.log(totalVenta)
-        console.log(usuarioID)
+   
         $.ajax({
             type: "POST",
             url: "../controller/VentaController.php", // Ajusta la ruta a tu controlador
